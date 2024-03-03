@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "401882858246",
+    "project_id": "chatapp-263df",
+    "storage_bucket": "chatapp-263df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401882858246:android:a18baf54a3f8a4c54fd487",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401882858246-17rflgsg84oj72us9hnsrt4qtcivvt5n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_app",
+            "certificate_hash": "6e46bd94f266c04f9cd50ce7f74f5d3748a11dec"
+          }
+        },
+        {
+          "client_id": "401882858246-5av6girbkborp6adlblacprihosr23jv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANVe5qPZyiNjYG0yhxZdcjeGhFAs_lG4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401882858246-5av6girbkborp6adlblacprihosr23jv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401882858246:android:f3e2d20e39b85f434fd487",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401882858246-5av6girbkborp6adlblacprihosr23jv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANVe5qPZyiNjYG0yhxZdcjeGhFAs_lG4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401882858246-5av6girbkborp6adlblacprihosr23jv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
