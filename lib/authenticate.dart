@@ -11,9 +11,9 @@ class Authenticate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (_auth.currentUser != null) {
-      return Homepage();
+      return const Homepage();
     } else {
-      return Create();
+      return const Create();
     }
   }
 }

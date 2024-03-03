@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers, sized_box_for_whitespace
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -69,6 +71,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
         userMap = value.docs[0].data();
         isLoading = false;
       });
+      // ignore: avoid_print
       print(userMap);
     });
   }
@@ -83,13 +86,13 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
               onPressed: () {
                 logout(context);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.logout,
                 color: Colors.white,
               ))
         ],
-        title: Text(
-          "Homescreen",
+        title: const Text(
+          '',
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -99,12 +102,12 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
               child: Container(
                 height: 20,
                 width: 20,
-                child: CircularProgressIndicator(),
+                child: const CircularProgressIndicator(),
               ),
             )
           : Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Padding(
@@ -112,49 +115,52 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
                   child: TextFormField(
                     controller: _search,
                     decoration: InputDecoration(
-                        label: Text("search"),
+                        label: const Text("Search Email"),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10))),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextButton(
-                    style: ButtonStyle(
+                    style: const ButtonStyle(
                         backgroundColor:
                             MaterialStatePropertyAll(Colors.black)),
                     onPressed: () {
                       onSearch();
                     },
-                    child: Text(
+                    child: const Text(
                       "search",
                       style: TextStyle(color: Colors.white),
                     )),
                 userMap != null
-                    ? ListTile(
-                        onTap: () {
-                          String roomId = chatRoomId(
-                              _auth.currentUser!.displayName!,
-                              userMap!['name']);
+                    ? Card(
+                        child: ListTile(
+                          onTap: () {
+                            String roomId = chatRoomId(
+                                _auth.currentUser!.displayName!,
+                                userMap!['name']);
 
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => Chatroom(
-                                    chatRoomId: roomId,
-                                    userMap: userMap!,
-                                  )));
-                        },
-                        leading: Icon(Icons.account_box, color: Colors.black),
-                        title: Text(
-                          userMap!['name'],
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Chatroom(
+                                      chatRoomId: roomId,
+                                      userMap: userMap!,
+                                    )));
+                          },
+                          leading: const Icon(Icons.account_box,
+                              color: Colors.black),
+                          title: Text(
+                            userMap!['name'],
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
+                          subtitle: Text(userMap!['email']),
+                          trailing: const Icon(Icons.chat, color: Colors.black),
                         ),
-                        subtitle: Text(userMap!['email']),
-                        trailing: Icon(Icons.chat, color: Colors.black),
                       )
                     : Container(),
               ],

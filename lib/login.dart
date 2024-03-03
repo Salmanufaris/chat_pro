@@ -1,10 +1,15 @@
+// ignore_for_file: sort_child_properties_last, sized_box_for_whitespace
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/create.dart';
 import 'package:flutter_application_1/home.dart';
 import 'package:flutter_application_1/methods.dart';
+import 'package:lottie/lottie.dart';
 
 class Loginpage extends StatefulWidget {
-  const Loginpage({Key? key}) : super(key: key);
+  const Loginpage({super.key});
 
   @override
   State<Loginpage> createState() => _LoginpageState();
@@ -27,7 +32,7 @@ class _LoginpageState extends State<Loginpage> {
               icon: const Icon(Icons.arrow_back))),
       body: isLoding
           ? Center(
-              child: Container(
+              child: SizedBox(
                 height: size.height / 20,
                 width: size.width / 20,
                 child: const CircularProgressIndicator(),
@@ -36,11 +41,11 @@ class _LoginpageState extends State<Loginpage> {
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.only(right: 150),
                     child: Container(
-                      height: 100,
+                      height: 70,
                       width: 200,
                       child: const Column(
                         children: [
@@ -61,8 +66,20 @@ class _LoginpageState extends State<Loginpage> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: Lottie.asset(
+                        "assets/animation/Animation - 1709477178313.json"),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(6),
                     child: TextFormField(
                       controller: _email,
                       decoration: InputDecoration(
@@ -78,12 +95,12 @@ class _LoginpageState extends State<Loginpage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(6),
                     child: TextFormField(
                       controller: _password,
                       obscureText: true,
                       decoration: InputDecoration(
-                        labelText: "Password",
+                        labelText: "password",
                         prefixIcon: const Icon(Icons.lock),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -92,14 +109,14 @@ class _LoginpageState extends State<Loginpage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   MaterialButton(
                       child: const Text(
                         "Login",
                         style: TextStyle(color: Colors.white),
                       ),
                       height: 50,
-                      minWidth: 300,
+                      minWidth: 340,
                       color: Colors.black,
                       onPressed: () {
                         if (_email.text.isNotEmpty &&
@@ -115,17 +132,17 @@ class _LoginpageState extends State<Loginpage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Homepage()));
-                              print("login succeffully");
+                                      builder: (context) => const Homepage()));
+                              log("Login Succeffully");
                             } else {
-                              print(" Login failed");
+                              log(" Login Failed");
                               setState(() {
                                 isLoding = false;
                               });
                             }
                           });
                         } else {
-                          print("enter filds");
+                          log("enter filds");
                         }
                       }),
                   TextButton(
@@ -135,7 +152,7 @@ class _LoginpageState extends State<Loginpage> {
                             MaterialPageRoute(
                                 builder: (context) => const Create()));
                       },
-                      child: const Text("creat account"))
+                      child: const Text("Creat Account"))
                 ],
               ),
             ),

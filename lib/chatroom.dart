@@ -1,3 +1,6 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, no_leading_underscores_for_local_identifiers, sized_box_for_whitespace, use_super_parameters, duplicate_ignore, body_might_complete_normally_catch_error
+
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,7 +34,7 @@ class Chatroom extends StatelessWidget {
   }
 
   Future uploadImage() async {
-    String fileName = Uuid().v1();
+    String fileName = const Uuid().v1();
     int status = 1;
 
     await _firestore
@@ -67,7 +70,7 @@ class Chatroom extends StatelessWidget {
           .collection('chats')
           .doc(fileName)
           .update({"message": imageUrl});
-      print(imageUrl);
+      log(imageUrl);
     }
   }
 
@@ -86,9 +89,8 @@ class Chatroom extends StatelessWidget {
           .collection('chats')
           .add(messages);
     } else {
-      print("Enter Some Text");
+      log("Enter Some Text");
     }
-    ;
   }
 
   @override
@@ -96,6 +98,28 @@ class Chatroom extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.call,
+                  color: Colors.white,
+                )),
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.video_call,
+                  color: Colors.white,
+                )),
+          ],
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              )),
           backgroundColor: Colors.black,
           title: StreamBuilder<DocumentSnapshot>(
             stream: _firestore
@@ -108,16 +132,18 @@ class Chatroom extends StatelessWidget {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.data != null) {
+                // ignore: avoid_unnecessary_containers
                 return Container(
                   child: Column(
                     children: [
                       Text(
                         userMap['name'],
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                       Text(
                         snapshot.data!['status'],
-                        style: TextStyle(color: Colors.white, fontSize: 14),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 14),
                       ),
                     ],
                   ),
@@ -130,7 +156,7 @@ class Chatroom extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: size.height / 1.25,
               width: size.width,
               child: StreamBuilder<QuerySnapshot>(
@@ -161,6 +187,7 @@ class Chatroom extends StatelessWidget {
               height: size.height / 10,
               width: size.width,
               alignment: Alignment.center,
+              // ignore: sized_box_for_whitespace
               child: Container(
                 height: size.height / 12,
                 width: size.width / 1.1,
@@ -168,14 +195,17 @@ class Chatroom extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      height: size.height / 17,
+                      height: size.height / 15,
                       width: size.width / 1.3,
                       child: TextField(
                         controller: _message,
                         decoration: InputDecoration(
                             suffixIcon: IconButton(
                               onPressed: () => getImage(),
-                              icon: Icon(Icons.photo),
+                              icon: const Icon(
+                                Icons.photo,
+                                color: Colors.black,
+                              ),
                             ),
                             hintText: "Send Message",
                             border: OutlineInputBorder(
@@ -184,7 +214,11 @@ class Chatroom extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                        icon: Icon(Icons.send), onPressed: onSendMessage),
+                        icon: const Icon(
+                          Icons.send,
+                          color: Colors.black,
+                        ),
+                        onPressed: onSendMessage),
                   ],
                 ),
               ),
@@ -203,21 +237,21 @@ class Chatroom extends StatelessWidget {
                 ? Alignment.centerRight
                 : Alignment.centerLeft,
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
-              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15), color: Colors.black),
               child: Text(
                 map["message"],
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w500),
               ),
             ),
           )
         : Container(
             height: size.height / 2.5,
             width: size.width,
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
             alignment: map["sendby"] == _auth.currentUser!.displayName
                 ? Alignment.centerRight
                 : Alignment.centerLeft,
@@ -237,7 +271,7 @@ class Chatroom extends StatelessWidget {
                           map["message"],
                           fit: BoxFit.cover,
                         )
-                      : CircularProgressIndicator()),
+                      : const CircularProgressIndicator()),
             ),
           );
   }

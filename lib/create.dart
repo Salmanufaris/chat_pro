@@ -1,11 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/home.dart';
 
 import 'package:flutter_application_1/login.dart';
 import 'package:flutter_application_1/methods.dart';
+import 'package:lottie/lottie.dart';
 
 class Create extends StatefulWidget {
-  const Create({Key? key}) : super(key: key);
+  const Create({super.key});
 
   @override
   State<Create> createState() => _CreateState();
@@ -23,29 +26,30 @@ class _CreateState extends State<Create> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: Icon(Icons.arrow_back),
+        leading: const Icon(Icons.arrow_back),
       ),
       body: isLoading
           ? Center(
-              child: Container(
+              child: SizedBox(
                 height: size.height / 20,
                 width: size.width / 20,
-                child: CircularProgressIndicator(),
+                child: const CircularProgressIndicator(),
               ),
             )
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Padding(
-                    padding: const EdgeInsets.only(right: 150),
+                    padding: const EdgeInsets.only(right: 120),
+                    // ignore: sized_box_for_whitespace
                     child: Container(
-                      height: 100,
+                      height: 70,
                       width: 200,
-                      child: Column(
+                      child: const Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 70),
+                            padding: EdgeInsets.only(right: 70),
                             child: Text(
                               "Welcome",
                               style: TextStyle(
@@ -61,17 +65,25 @@ class _CreateState extends State<Create> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: Lottie.asset(
+                        "assets/animation/Animation - 1709477178313.json"),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(6),
                     child: TextFormField(
                       controller: _name,
                       decoration: InputDecoration(
                         labelText: "Name",
-                        prefixIcon: Icon(Icons.person),
+                        prefixIcon: const Icon(Icons.person),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.grey,
                           ),
                         ),
@@ -79,15 +91,15 @@ class _CreateState extends State<Create> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(6),
                     child: TextFormField(
                       controller: _email,
                       decoration: InputDecoration(
                         labelText: "Email",
-                        prefixIcon: Icon(Icons.email),
+                        prefixIcon: const Icon(Icons.email),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.grey,
                           ),
                         ),
@@ -95,27 +107,28 @@ class _CreateState extends State<Create> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(6),
                     child: TextFormField(
                       controller: _password,
                       decoration: InputDecoration(
                         labelText: "Password",
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.lock),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.grey),
+                          borderSide: const BorderSide(color: Colors.grey),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   MaterialButton(
-                      child: Text(
+                      // ignore: sort_child_properties_last
+                      child: const Text(
                         "Create Account",
                         style: TextStyle(color: Colors.white),
                       ),
                       height: 50,
-                      minWidth: 300,
+                      minWidth: 330,
                       color: Colors.black,
                       onPressed: () {
                         if (_name.text.isNotEmpty &&
@@ -131,30 +144,31 @@ class _CreateState extends State<Create> {
                                 isLoading = false;
                               });
 
-                              print("Account Created Succesfully");
+                              log("Account Created Succesfully");
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Homepage()));
+                                      builder: (context) => const Homepage()));
                             } else {
-                              print("Account Created Successfulyy");
+                              log("Account Created Successfulyy");
                               setState(() {
                                 isLoading = false;
                               });
                             }
                           });
                         } else {
-                          print("enter filds");
+                          log("enter filds");
                         }
                       }),
                   TextButton(
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Loginpage()),
+                        MaterialPageRoute(
+                            builder: (context) => const Loginpage()),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       "Login",
                       style: TextStyle(color: Colors.black),
                     ),

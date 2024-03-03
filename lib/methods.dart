@@ -1,8 +1,10 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers, deprecated_member_use, avoid_print, unnecessary_null_comparison
+
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/login.dart';
 
 Future<User?> createAccount(String name, String email, String password) async {
@@ -17,7 +19,7 @@ Future<User?> createAccount(String name, String email, String password) async {
     User? user = userCredential.user;
 
     if (user != null) {
-      print("Account created successfully");
+      log("Account created successfully");
       user.updateProfile(displayName: name);
 
       await _firestore.collection("users").doc(_auth.currentUser!.uid).set({
@@ -28,11 +30,11 @@ Future<User?> createAccount(String name, String email, String password) async {
       });
       return user;
     } else {
-      print("Account creation failed");
+      log("Account creation failed");
       return null;
     }
   } catch (e) {
-    print("Error creating account: $e");
+    log("Error creating account: $e");
     return null;
   }
 }
@@ -47,14 +49,14 @@ Future<User?> logIn(String email, String password) async {
     );
     User user = userCredential.user!;
     if (user != null) {
-      print("Login Successful");
+      log("Login Successful");
       return user;
     } else {
-      print("Login failed");
+      log("Login failed");
       return null;
     }
   } catch (e) {
-    print("Error Signing In: $e");
+    log("Error Signing In: $e");
     return null;
   }
 }
@@ -64,7 +66,7 @@ Future logout(BuildContext context) async {
   try {
     await _auth.signOut().then((user) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Loginpage()));
+          context, MaterialPageRoute(builder: (context) => const Loginpage()));
     });
   } catch (e) {
     print(e);
