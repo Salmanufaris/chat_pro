@@ -18,10 +18,14 @@ Future<User?> createAccount(String name, String email, String password) async {
 
     if (user != null) {
       print("Account created successfully");
-      await _firestore
-          .collection("users")
-          .doc(_auth.currentUser!.uid)
-          .set({"name": name, "email": email, "status": "unavailable"});
+      user.updateProfile(displayName: name);
+
+      await _firestore.collection("users").doc(_auth.currentUser!.uid).set({
+        "name": name,
+        "email": email,
+        "status": "unavailable",
+        "uid": _auth.currentUser!.uid,
+      });
       return user;
     } else {
       print("Account creation failed");
