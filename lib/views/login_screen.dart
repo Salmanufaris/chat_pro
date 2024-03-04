@@ -1,34 +1,36 @@
+// ignore_for_file: sort_child_properties_last, sized_box_for_whitespace
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/home.dart';
-
-import 'package:flutter_application_1/login.dart';
-import 'package:flutter_application_1/methods.dart';
+import 'package:flutter_application_1/views/ac_create_screen.dart';
+import 'package:flutter_application_1/views/home_screen.dart';
+import 'package:flutter_application_1/service/auth_functions.dart';
 import 'package:lottie/lottie.dart';
 
-class Create extends StatefulWidget {
-  const Create({super.key});
+class Loginpage extends StatefulWidget {
+  const Loginpage({super.key});
 
   @override
-  State<Create> createState() => _CreateState();
+  State<Loginpage> createState() => _LoginpageState();
 }
 
-class _CreateState extends State<Create> {
+class _LoginpageState extends State<Loginpage> {
   final TextEditingController _email = TextEditingController();
-  final TextEditingController _name = TextEditingController();
   final TextEditingController _password = TextEditingController();
-  bool isLoading = false;
+  bool isLoding = false;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: const Icon(Icons.arrow_back),
-      ),
-      body: isLoading
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back))),
+      body: isLoding
           ? Center(
               child: SizedBox(
                 height: size.height / 20,
@@ -39,10 +41,9 @@ class _CreateState extends State<Create> {
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 10),
                   Padding(
-                    padding: const EdgeInsets.only(right: 120),
-                    // ignore: sized_box_for_whitespace
+                    padding: const EdgeInsets.only(right: 150),
                     child: Container(
                       height: 70,
                       width: 200,
@@ -58,12 +59,15 @@ class _CreateState extends State<Create> {
                             ),
                           ),
                           Text(
-                            "Create Account to Continue",
+                            "Login to Continue",
                             style: TextStyle(color: Colors.grey),
                           )
                         ],
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   SizedBox(
                     height: 100,
@@ -72,23 +76,7 @@ class _CreateState extends State<Create> {
                         "assets/animation/Animation - 1709477178313.json"),
                   ),
                   SizedBox(
-                    height: 30,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: TextFormField(
-                      controller: _name,
-                      decoration: InputDecoration(
-                        labelText: "Name",
-                        prefixIcon: const Icon(Icons.person),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                    ),
+                    height: 40,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(6),
@@ -110,8 +98,9 @@ class _CreateState extends State<Create> {
                     padding: const EdgeInsets.all(6),
                     child: TextFormField(
                       controller: _password,
+                      obscureText: true,
                       decoration: InputDecoration(
-                        labelText: "Password",
+                        labelText: "password",
                         prefixIcon: const Icon(Icons.lock),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -122,37 +111,33 @@ class _CreateState extends State<Create> {
                   ),
                   const SizedBox(height: 20),
                   MaterialButton(
-                      // ignore: sort_child_properties_last
                       child: const Text(
-                        "Create Account",
+                        "Login",
                         style: TextStyle(color: Colors.white),
                       ),
                       height: 50,
-                      minWidth: 330,
+                      minWidth: 340,
                       color: Colors.black,
                       onPressed: () {
-                        if (_name.text.isNotEmpty &&
-                            _email.text.isNotEmpty &&
+                        if (_email.text.isNotEmpty &&
                             _password.text.isNotEmpty) {
                           setState(() {
-                            isLoading = true;
+                            isLoding = true;
                           });
-                          createAccount(_name.text, _email.text, _password.text)
-                              .then((user) {
+                          logIn(_email.text, _password.text).then((user) {
                             if (user != null) {
                               setState(() {
-                                isLoading = false;
+                                isLoding = false;
                               });
-
-                              log("Account Created Succesfully");
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => const Homepage()));
+                              log("Login Succeffully");
                             } else {
-                              log("Account Created Successfulyy");
+                              log(" Login Failed");
                               setState(() {
-                                isLoading = false;
+                                isLoding = false;
                               });
                             }
                           });
@@ -161,18 +146,13 @@ class _CreateState extends State<Create> {
                         }
                       }),
                   TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Loginpage()),
-                      );
-                    },
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  )
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Create()));
+                      },
+                      child: const Text("Creat Account"))
                 ],
               ),
             ),

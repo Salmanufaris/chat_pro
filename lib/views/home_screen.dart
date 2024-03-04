@@ -3,8 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/chatroom.dart';
-import 'package:flutter_application_1/methods.dart';
+import 'package:flutter_application_1/views/chatroom.dart';
+import 'package:flutter_application_1/service/auth_functions.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
